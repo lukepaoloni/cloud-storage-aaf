@@ -1,0 +1,38 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "prettier"],
+  "jsRules": {
+    "no-unused-expression": true,
+    "no-console": false
+  },
+  "rules": {
+    "quotemark": [true, "single"],
+    "member-access": [false],
+    "ordered-imports": [false],
+    "max-line-length": [false, 150],
+    "member-ordering": [false],
+    "interface-name": [false],
+    "arrow-parens": false,
+    "object-literal-sort-keys": false
+  },
+  "quotes": [
+    4,
+    "single",
+    {
+      "avoidEscape": true,
+      "allowTemplateLiterals": true
+    }
+  ],
+  "prettier": [
+    "error",
+    {
+      "trailingComma": "es6",
+      "singleQuote": true,
+      "printWidth": 120
+    }
+  ],
+  "rulesDirectory": [],
+  "plugins": [
+    "prettier"
+  ]
+}

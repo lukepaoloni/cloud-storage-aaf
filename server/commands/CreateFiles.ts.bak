@@ -1,0 +1,9 @@
+import { Seed, Factory } from "typeorm-seeding";
+import { Connection } from "typeorm";
+import { File } from "@file/file.model";
+
+export class CreateFiles implements Seed {
+  public async seed(factory: Factory, connection: Connection): Promise<any> {
+    await factory(File)().seedMany(15);
+  }
+}

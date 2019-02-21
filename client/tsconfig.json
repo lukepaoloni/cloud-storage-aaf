@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "noEmit": true,
+    "noImplicitAny": false,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@server/*": ["../server/src/*"],
+      "@actions": ["./src/actions"],
+      "@actions/*": ["./src/actions/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@services/*": ["./src/services/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@variables/*": ["./src/variables/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@components": ["./src/ui/components"],
+      "@components/*": ["./src/ui/components/*"],
+      "@views/*": ["./src/ui/views/*"],
+      "@layouts/*": ["./src/ui/layouts/*"],
+      "@assets/*": ["./src/ui/assets/*"]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

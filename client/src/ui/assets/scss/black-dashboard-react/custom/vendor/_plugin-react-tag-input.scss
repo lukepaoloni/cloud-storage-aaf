@@ -1,0 +1,62 @@
+.ReactTags__tagInputField {
+    @extend .form-control;
+}
+
+.ReactTags__tagInput {
+    @extend .col-12;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.ReactTags__suggestions {
+    display: flex;
+    padding-top: 10px;
+    background: #2e3046;
+    @extend .rounded;
+    min-height: 50px;
+
+    ul {
+        display: inline-flex;
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        >li {
+            width: 100%;
+            display: flex;
+
+            span {
+                padding: 5px;
+                padding-left: 15px;
+                padding-right: 15px;
+                background: #373950;
+                @extend .rounded;
+                width: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.ReactTags__selected {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .tag-wrapper {
+        order: 2;
+        @extend .p-2;
+        @extend .badge;
+        @extend .badge-info;
+        font-size: 12px;
+        margin-left: 2px;
+        margin-right: 2px;
+
+        .ReactTags__remove {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    }
+}

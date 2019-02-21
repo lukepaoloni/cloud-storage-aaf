@@ -1,0 +1,12 @@
+{
+    "type": "mongodb",
+    "host": "localhost",
+    "database": "cloud_storage",
+    "url": "mongodb://zeus:Basketball23!@ds129051.mlab.com:29051/cloud_storage",
+    "entities": ["src/**/**.model{.ts,.js}"],
+    "synchronize": true,
+    "useNewUrlParser": true,
+    "username": "zeus",
+    "password": "Basketball23!",
+    "port": 29051
+}
