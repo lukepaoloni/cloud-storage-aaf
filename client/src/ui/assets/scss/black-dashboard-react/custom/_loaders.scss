@@ -1,0 +1,26 @@
+$primary-color: $secondary;
+
+@import "loaders.css/src/animations/ball-beat.scss";
+
+.loader-hidden {
+  display: none;
+}
+
+.loader-center {
+  position: absolute;
+  background: #1e2031ad;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.loader-active {
+  display: block;
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "pretty": true,
+    "paths": {
+      "@shared/*": ["./src/shared/*"],
+      "@user/*": ["./src/user/*"],
+      "@user": ["./src/user"],
+      "@history/*": ["./src/history/*"],
+      "@history": ["./src/history"],
+      "@file/*": ["./src/file/*"],
+      "@file": ["./src/file"],
+      "@database/*": ["./src/database/*"],
+      "@auth/*": ["./src/auth/*"],
+      "@auth": ["./src/auth"],
+    }
+  },
+  "exclude": ["node_modules"]
+}

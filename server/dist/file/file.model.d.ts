@@ -1,0 +1,42 @@
+import { ObjectID, BaseEntity } from 'typeorm';
+import { History } from '@history';
+import { TagDTO } from '../tag/tag.dto';
+import { UserFileStatus } from './dto/userFileStatus.dto';
+import { UserDTO } from '@shared/interfaces/user.dto';
+export declare class File extends BaseEntity {
+    _id: ObjectID;
+    title: string;
+    name: string;
+    type: string;
+    size: number;
+    url?: string;
+    path: string;
+    original_author: UserDTO;
+    history: Partial<History[]>;
+    tags: TagDTO[];
+    currentUserCheckedIn: UserFileStatus;
+    status: 'active' | 'archived';
+    version: number;
+    created_at: Date;
+    updated_at: Date;
+    setData(data: Partial<File>): void;
+    addToHistory(data: History): void;
+    restoreVersion(historyVersion: number): boolean;
+    getLastVersion(): number;
+    toJson(showHistory?: boolean): {
+        _id: ObjectID;
+        title: string;
+        name: string;
+        type: string;
+        size: number;
+        url: string;
+        path: string;
+        original_author: UserDTO;
+        history: History[];
+        tags: TagDTO[];
+        status: "active" | "archived";
+        version: number;
+        currentUserCheckedIn: UserFileStatus;
+        updated_at: Date;
+    };
+}

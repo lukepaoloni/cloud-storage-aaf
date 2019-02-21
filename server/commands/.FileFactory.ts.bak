@@ -1,0 +1,40 @@
+import { File } from "@file/file.model";
+import { define } from "typeorm-seeding";
+import * as Faker from "faker";
+import { User } from "@user";
+import { getMongoManager } from "typeorm";
+import * as _ from "underscore";
+import { History } from "@history/history.model";
+import { getUploadPath, getFilename } from "@shared/helpers/file";
+import { normalize } from "path";
+const manager = getMongoManager();
+let users: User[] = [];
+manager
+  .getMongoRepository(User)
+  .find()
+  .then(fetchUsers => (users = fetchUsers));
+
+define(File, (faker: typeof Faker, settings: { role: string }) => {
+  const url = faker.image.imageUrl();
+  const index = faker.random.number(10);
+  const title = faker.random.words(1);
+  const path = normalize(`${getUploadPath()}${title}/tmp`);
+  const file = new File();
+  file.name = url;
+  file.title = title;
+  file.original_author = _.pick(users[index], "id", "email", "name");
+  file.path = null;
+  file.url = url;
+  file.version = 1;
+  file.history.push(
+    new History({
+      title,
+      path,
+      name: url,
+      size: faker.random.number(),
+      version: 1,
+      author: _.pick(users[index], "id", "email", "name")
+    })
+  );
+  return file;
+});

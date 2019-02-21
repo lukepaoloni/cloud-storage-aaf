@@ -1,0 +1,13 @@
+.filepond-upload {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.filepond-upload label {
+  color: #27293d !important;
+}

@@ -1,0 +1,12 @@
+{
+    "type": "mongodb",
+    "host": "localhost",
+    "database": "cloud_storage",
+    "url": "",
+    "entities": ["src/**/**.model{.ts,.js}"],
+    "synchronize": true,
+    "useNewUrlParser": true,
+    "username": "",
+    "password": "",
+    "port": 29051
+}
