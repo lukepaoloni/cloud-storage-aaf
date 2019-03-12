@@ -47,7 +47,11 @@ export class FileRepository extends Repository<FileEntity> {
     }
 
     public async getAll() {
-        const files = await this.find();
+        const files = await this.find({
+            order: {
+                created_at: 'ASC',
+            },
+        });
         const formattedFiles = files.map(file => {
             return file.toJson();
         });
