@@ -7935,6 +7935,16 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-transition-group@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.6.0.tgz#3c41cbdd9c044c5f8604d4e8d319e860919c9fae"
+  integrity sha512-VzZ+6k/adL3pJHo4PU/MHEPjW59/TGQtRsXC+wnxsx2mxjQKNHnDdJL/GpYuPJIsyHGjYbBQfIJ2JNOAdPc8GQ==
+  dependencies:
+    dom-helpers "^3.3.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+    react-lifecycles-compat "^3.0.4"
+
 react@^16.4.2:
   version "16.8.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.2.tgz#83064596feaa98d9c2857c4deae1848b542c9c0c"
@@ -8602,6 +8612,11 @@ shellwords@^0.1.1:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-react-validator@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/simple-react-validator/-/simple-react-validator-1.0.5.tgz#183169c7f12743f5862ee87cc50200a86aa24ad7"
+  integrity sha512-AdfLvUKA+ozYSQea0Yl9T1ZR0teZ/I0PvupUKu3wAk0lCap59T41IRKAZ2c5H1isopiRzPjGzOSGk2LCBFtc9w==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"

@@ -1,15 +1,14 @@
-import { inject, observer } from 'mobx-react';
-import DevTools from 'mobx-react-devtools';
-import PerfectScrollbar from 'perfect-scrollbar';
-import React from 'react';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { inject, observer } from "mobx-react";
+import PerfectScrollbar from "perfect-scrollbar";
+import React from "react";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+// import { ToastContainer } from "react-toastify";
+import Footer from "@components/Footer/Footer";
+import AdminNavbar from "@components/Navbars/AdminNavbar";
+import Sidebar from "@components/Sidebar/Sidebar";
+import Login from "@views/Login";
 
-import Footer from '@components/Footer/Footer';
-import AdminNavbar from '@components/Navbars/AdminNavbar';
-import Sidebar from '@components/Sidebar/Sidebar';
-import Login from '@views/Login';
-
-import routes from '../../../routes';
+import routes from "../../../routes";
 
 let ps: PerfectScrollbar;
 
@@ -78,8 +77,8 @@ class Admin extends React.Component<any, any> {
               this.props.AuthStore.isLoggedIn ? (
                 <prop.component {...this.props} />
               ) : (
-                  <Redirect to="/login" />
-                )
+                <Redirect to="/login" />
+              )
             }
             key={key}
           />
@@ -110,6 +109,7 @@ class Admin extends React.Component<any, any> {
     return (
       <>
         <div className="wrapper">
+          {/* <ToastContainer /> */}
           <Sidebar
             {...this.props}
             routes={routes}
@@ -129,9 +129,9 @@ class Admin extends React.Component<any, any> {
             />
             <Switch>{this.getRoutes(routes)}</Switch>
             {// we don't want the Footer to be rendered on map page
-              this.props.location.pathname.indexOf("maps") !== -1 ? null : (
-                <Footer fluid />
-              )}
+            this.props.location.pathname.indexOf("maps") !== -1 ? null : (
+              <Footer fluid />
+            )}
           </div>
         </div>
       </>

@@ -1,20 +1,37 @@
-import algoliasearch from 'algoliasearch/lite';
-import classNames from 'classnames';
-import React from 'react';
-import { connectHits, Highlight, InstantSearch, SearchBox } from 'react-instantsearch-dom';
-import { Link, withRouter } from 'react-router-dom';
+import algoliasearch from "algoliasearch/lite";
+import classNames from "classnames";
+import React from "react";
 import {
-  Button, Collapse, Container, DropdownItem, DropdownMenu, DropdownToggle, InputGroup, Modal,
-  ModalBody, Nav, Navbar, NavbarBrand, NavLink, UncontrolledDropdown
-} from 'reactstrap';
-import * as upath from 'upath';
+  connectHits,
+  Highlight,
+  InstantSearch,
+  SearchBox
+} from "react-instantsearch-dom";
+import { Link, withRouter } from "react-router-dom";
+import {
+  Button,
+  Collapse,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  InputGroup,
+  Modal,
+  ModalBody,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavLink,
+  UncontrolledDropdown
+} from "reactstrap";
+import * as upath from "upath";
 
-import { State } from './state';
+import { State } from "./state";
 
 const searchClient = algoliasearch(
-  'R7OCY5RB3N',
-  '9f4dda9708e9eee086e47e4dc180f37e'
-)
+  "R7OCY5RB3N",
+  "9f4dda9708e9eee086e47e4dc180f37e"
+);
 
 class AdminNavbar extends React.Component<any, State> {
   constructor(props: any) {
@@ -44,10 +61,10 @@ class AdminNavbar extends React.Component<any, State> {
     }
   };
 
-  onLogout = (e) => {
-    localStorage.clear()
-    window.location.href = `${process.env.PUBLIC_URL}/login`
-  }
+  onLogout = e => {
+    sessionStorage.clear();
+    window.location.href = `${process.env.PUBLIC_URL}/login`;
+  };
   // this function opens and closes the collapse on small devices
   toggleCollapse = () => {
     if (this.state.collapseOpen) {
@@ -173,18 +190,31 @@ class AdminNavbar extends React.Component<any, State> {
                     onClick={(e: any) => e.preventDefault()}
                   >
                     <div className="photo">
-                      <img alt="..." src={require('../../assets/img/anime3.png')} />
+                      <img
+                        alt="..."
+                        src={require("../../assets/img/anime3.png")}
+                      />
                     </div>
                     <b className="caret d-none d-lg-block d-xl-block" />
                     <p className="d-lg-none">Log out</p>
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-navbar" right tag="ul">
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item" href="/admin/user-profile">Profile</DropdownItem>
+                      <DropdownItem
+                        className="nav-item"
+                        href="/admin/user-profile"
+                      >
+                        Profile
+                      </DropdownItem>
                     </NavLink>
                     <DropdownItem divider tag="li" />
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item" onClick={this.onLogout}>Log out</DropdownItem>
+                      <DropdownItem
+                        className="nav-item"
+                        onClick={this.onLogout}
+                      >
+                        Log out
+                      </DropdownItem>
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -214,7 +244,14 @@ class AdminNavbar extends React.Component<any, State> {
 
 function Hit(props) {
   return (
-    <a href={`${process.env.PUBLIC_URL}/admin/files/${props._id}`} className="hit-item" style={{ backgroundImage: `url('/${upath.normalize(`uploads/${props.path}`)}')` }} onClick={props.onClick}>
+    <a
+      href={`${process.env.PUBLIC_URL}/admin/files/${props._id}`}
+      className="hit-item"
+      style={{
+        backgroundImage: `url('/${upath.normalize(`uploads/${props.path}`)}')`
+      }}
+      onClick={props.onClick}
+    >
       <div className="hit-metadata-container">
         <div className="hit-metadata">
           <div className="hit-title">
@@ -225,20 +262,22 @@ function Hit(props) {
             <span>Name: </span>
             <Highlight attribute="name" hit={props} />
           </div>
-          {props.original_author.name ?
+          {props.original_author.name ? (
             <div className="hit-originalAuthor">
               <span>Author: </span>
               <span>{props.original_author.name}</span>
             </div>
-            : ''}
-          {props.type ?
+          ) : (
+            ""
+          )}
+          {props.type ? (
             <div className="hit-type">
               <span>Type: </span>
               <span>{props.type}</span>
             </div>
-            :
-            ''
-          }
+          ) : (
+            ""
+          )}
           <div className="hit-type">
             <span>Version: </span>
             <Highlight attribute="version" hit={props} />
@@ -249,7 +288,7 @@ function Hit(props) {
   );
 }
 
-const Hits = connectHits((props) => {
+const Hits = connectHits(props => {
   const masonry = [
     [2, 1],
     [1, 1],
@@ -260,7 +299,7 @@ const Hits = connectHits((props) => {
     [1, 2],
     [1, 1],
     [1, 1]
-  ]
+  ];
   let count = 0;
   const max = 8;
   return (
@@ -268,12 +307,17 @@ const Hits = connectHits((props) => {
       {props.hits.map((hit, index) => {
         count = max === count ? 0 : index;
         return (
-          <div className={`grid-item grid-item-${index} row-span-${masonry[count][0]} col-span-${masonry[count][1]}`} key={hit.objectID}>
+          <div
+            className={`grid-item grid-item-${index} row-span-${
+              masonry[count][0]
+            } col-span-${masonry[count][1]}`}
+            key={hit.objectID}
+          >
             <Hit {...hit} {...props} />
           </div>
-        )
+        );
       })}
     </div>
-  )
-})
+  );
+});
 export default withRouter(AdminNavbar);

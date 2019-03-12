@@ -1,25 +1,36 @@
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Import FilePond styles
-import 'filepond/dist/filepond.min.css';
+import "filepond/dist/filepond.min.css";
 
-import axios from 'axios';
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import filesize from 'filesize';
-import { inject, observer } from 'mobx-react';
-import React from 'react';
-import { FilePond, registerPlugin } from 'react-filepond';
-import Loader from 'react-loaders';
-import NotificationAlert from 'react-notification-alert';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import filesize from "filesize";
+import { inject, observer } from "mobx-react";
+import React from "react";
+import { FilePond, registerPlugin } from "react-filepond";
+import Loader from "react-loaders";
+import NotificationAlert from "react-notification-alert";
+import { Link } from "react-router-dom";
 import {
-  Button, Card, CardBody, Col, Collapse, Modal, ModalBody, ModalFooter, ModalHeader, Row, Table
-} from 'reactstrap';
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Collapse,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row,
+  Table
+} from "reactstrap";
 
-import { authHeader } from '@helpers/auth-header';
-import { FileRO } from '@server/shared/interfaces/file.response';
+import { authHeader } from "@helpers/auth-header";
+import { FileRO } from "@server/shared/interfaces/file.response";
 
-import { IStorageProps } from './IStorageProps';
+import { IStorageProps } from "./IStorageProps";
+import moment from "moment";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const columns = [
@@ -73,11 +84,7 @@ class Storage extends React.Component<IStorageProps, any> {
     let options = {};
     options = {
       place: place,
-      message: (
-        <div>
-          {message}
-        </div>
-      ),
+      message: <div>{message}</div>,
       type: type,
       icon: icon,
       autoDismiss: 7
@@ -107,44 +114,53 @@ class Storage extends React.Component<IStorageProps, any> {
   toggle = () => {
     this.setState({
       modal: !this.state.modal
-    })
-  }
+    });
+  };
 
-  onArchiveModal = (e) => {
-    const id = e.target.getAttribute('data-id')
-    console.log(id)
+  onArchiveModal = e => {
+    const id = e.target.getAttribute("data-id");
+    console.log(id);
     this.setState({
       selectedId: id
-    })
-    this.toggle()
-  }
+    });
+    this.toggle();
+  };
 
-  onDelete = async (e) => {
-    const id = this.state.selectedId
-    console.log(id)
+  onDelete = async e => {
+    const id = this.state.selectedId;
+    console.log(id);
     this.setState({
       isLoading: true
-    })
+    });
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_REST_API}files/${id}`,
-        { headers: authHeader() }
-      )
-      await this.loadFiles()
-      this.notify('tc', 'success', 'Successfully deleted file.', 'tim-icons icon-check-2')
+      await axios.delete(`${process.env.REACT_APP_REST_API}files/${id}`, {
+        headers: authHeader()
+      });
+      await this.loadFiles();
+      this.notify(
+        "tc",
+        "success",
+        "Successfully deleted file.",
+        "tim-icons icon-check-2"
+      );
     } catch (err) {
-      console.error(err)
-      this.notify('tc', 'danger', 'Unable to delete the file.', 'tim-icons icon-alert-circle-exc')
+      console.error(err);
+      this.notify(
+        "tc",
+        "danger",
+        "Unable to delete the file.",
+        "tim-icons icon-alert-circle-exc"
+      );
     }
     this.setState({
       isLoading: false
-    })
-    this.toggle()
-  }
+    });
+    this.toggle();
+  };
 
   render() {
     const rows = this.props.FilesStore.files;
-    const { role } = this.props.UserStore
+    const { role } = this.props.UserStore;
     return (
       <>
         <div className="content">
@@ -152,11 +168,30 @@ class Storage extends React.Component<IStorageProps, any> {
             <NotificationAlert ref="notificationAlert" />
           </div>
           <Modal isOpen={this.state.modal} toggle={this.toggle}>
-            <ModalHeader toggle={this.toggle}>{role === 'admin' ? 'Delete' : 'Archive'}</ModalHeader>
-            <ModalBody>Are you sure you want to {role === 'admin' ? 'delete' : 'archive'} this file?</ModalBody>
+            <ModalHeader toggle={this.toggle}>
+              {role === "admin" ? "Delete" : "Archive"}
+            </ModalHeader>
+            <ModalBody>
+              Are you sure you want to {role === "admin" ? "delete" : "archive"}{" "}
+              this file?
+            </ModalBody>
             <ModalFooter>
-              <Button type="button" color="danger" size="md" onClick={this.onDelete}>{role === 'admin' ? 'delete' : 'Archive'}</Button>
-              <Button type="button" color="secondary" size="md" onClick={this.toggle}>Cancel</Button>
+              <Button
+                type="button"
+                color="danger"
+                size="md"
+                onClick={this.onDelete}
+              >
+                {role === "admin" ? "delete" : "Archive"}
+              </Button>
+              <Button
+                type="button"
+                color="secondary"
+                size="md"
+                onClick={this.toggle}
+              >
+                Cancel
+              </Button>
             </ModalFooter>
           </Modal>
           <Row>
@@ -183,7 +218,7 @@ class Storage extends React.Component<IStorageProps, any> {
                               key={index}
                               className={item.class ? item.class : null}
                             >
-                              <div className={`${item.sort ? 'sort-col' : ''}`}>
+                              <div className={`${item.sort ? "sort-col" : ""}`}>
                                 {item.title}
                               </div>
                             </th>
@@ -195,18 +230,17 @@ class Storage extends React.Component<IStorageProps, any> {
                           <tr key={index}>
                             <th>{item.title ? item.title : item.name}</th>
                             <th>{item.original_author.name}</th>
-                            <th>12/02/2019 2:30 PM</th>
+                            <th>{moment(item.updated_at).fromNow()}</th>
                             <th align="center">
-                              {
-                                item.currentUserCheckedIn ?
-                                  <small className="disable permission">
-                                    yes
+                              {item.currentUserCheckedIn ? (
+                                <small className="disable permission">
+                                  yes
                                 </small>
-                                  :
-                                  <small className="allow permission mr-2">
-                                    no
+                              ) : (
+                                <small className="allow permission mr-2">
+                                  no
                                 </small>
-                              }
+                              )}
                             </th>
                             <th>{filesize(item.size, { round: 0 })}</th>
                             <th className="text-center">{item.version}</th>
@@ -218,7 +252,13 @@ class Storage extends React.Component<IStorageProps, any> {
                                 <div className="sr-only">View</div>
                                 <i className="fas fa-eye" />
                               </Link>
-                              <Button color="info" size="sm" className="mr-2" onClick={this.onArchiveModal} data-id={item._id}>
+                              <Button
+                                color="info"
+                                size="sm"
+                                className="mr-2"
+                                onClick={this.onArchiveModal}
+                                data-id={item._id}
+                              >
                                 <div className="sr-only">Archive</div>
                                 <i className="fas fa-archive" />
                               </Button>
